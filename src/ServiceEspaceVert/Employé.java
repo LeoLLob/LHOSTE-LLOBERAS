@@ -5,5 +5,5 @@ public class Employé {
 
 
 
-    private String salut = "salut";
+
 }
