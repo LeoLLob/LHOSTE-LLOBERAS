@@ -9,9 +9,13 @@ import java.util.ArrayList;
 public class ServiceEspacesVerts {
     private ArrayList<Association> listAssociations;
 
+    public ServiceEspacesVerts(){
+        this.listAssociations = new ArrayList<>();
+    }
+
     public void notificationAbatage(int id){
         String notification;
-        notification = ("L'arbre numéro " + id + "à été abattu.");
+        notification = ("L'arbre numéro " + id + " à été abattu.");
         for(Association association: this.listAssociations) {
             association.messagerie.add(notification);
         }
@@ -19,7 +23,7 @@ public class ServiceEspacesVerts {
 
     public void notificationClassification(int id){
         String notification;
-        notification = ("L'arbre numéro " + id + "à été classifié.");
+        notification = ("L'arbre numéro " + id + " à été classifié.");
         for(Association association: this.listAssociations) {
             association.messagerie.add(notification);
         }

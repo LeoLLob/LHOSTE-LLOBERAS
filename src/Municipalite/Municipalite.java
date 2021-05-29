@@ -89,6 +89,14 @@ public class Municipalite {
         return listArbres;
     }
 
+    public ArrayList<Arbre> getListArbresRemarquables() {
+        return listArbresRemarquables;
+    }
+
+    public ArrayList<Arbre> getListArbresNonRemarquables() {
+        return listArbresNonRemarquables;
+    }
+
     public void toString(ArrayList<Arbre> arbres){
         StringBuilder  afficheArbres = new StringBuilder();
         for(Arbre arbre: arbres) {
