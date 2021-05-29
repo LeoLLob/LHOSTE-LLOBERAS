@@ -31,6 +31,18 @@ public class Donateur
         }
     }
 
+    public void desincriptionAsso(Association association)
+    {
+        for (Association asso:listeAssociations)
+        {
+            if (asso.getNom() == association.getNom())
+            {
+                asso.suppressionDonateur(this);
+                listeAssociations.remove(asso);
+            }
+        }
+    }
+
 }
 
 

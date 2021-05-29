@@ -5,18 +5,30 @@ import java.util.ArrayList;
 public class Membre
 {
     private String nom;
-    private String prenom;
     private String dateDeNaissance;
     private String adresse;
     private String dateDePremiereInscription;
     private String[] cotisation;
     private boolean aPaye;
     private ArrayList<String> listeArbre;
+    private Association association;
+    private boolean estPresident;
+
+    public Membre(String nom, String datenaissance, String adresse, String datePremiereInscription, Association association)
+    {
+        this.nom = nom;
+        this.dateDeNaissance = datenaissance;
+        this.adresse = adresse;
+        this.dateDePremiereInscription = datePremiereInscription;
+        this.association = association;
+        this.association.ajoutMembre(this);
+        this.estPresident = false;
+        this.aPaye = false;
+    }
 
     public void infosPersos(){
         StringBuilder infosPersos = new StringBuilder();
-        infosPersos.append("NOM : " + nom);
-        infosPersos.append("\nPrenom : " + prenom);
+        infosPersos.append("NOM : " + nom);;
         infosPersos.append("\nDate de naissance : " + dateDeNaissance);
         infosPersos.append("\nAdresse : " + adresse);
         infosPersos.append("\nDate 1ere inscripton : " + dateDePremiereInscription);
@@ -28,16 +40,14 @@ public class Membre
         return nom;
     }
 
-    public String getPrenom()
+    public void setEstPresident(boolean estPresident)
     {
-        return prenom;
+        this.estPresident = estPresident;
     }
-
 
     public void effacerDonneesPerso()
     {
         nom = "personne ayant quitté l'association";
-        prenom = "";
         dateDeNaissance = "";
         adresse = "";
         dateDePremiereInscription = "";

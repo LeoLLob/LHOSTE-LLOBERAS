@@ -15,16 +15,13 @@ public class Association
     private ArrayList<int[]> visitesRemarquables;
     private StringBuilder rapportActivite;
     private int annee;
+    public StringBuilder messagerie;
 
     public Association(String nom, President president)
     {
         this.nom = nom;
         this.president = president;
-        listeMembres = new ArrayList<>();
         listeMembres.add(this.president);
-        listeDonateurs = new ArrayList<>();
-        recommandationsMembres = new ArrayList<>();
-        visitesRemarquables = new ArrayList<>();
         this.solde = 1000;
         this.recettes = 0;
         this.depenses = 0;
@@ -53,7 +50,7 @@ public class Association
     {
         for (Membre memb:listeMembres)
         {
-            if (memb.getNom() == membre.getNom() && memb.getPrenom() == membre.getPrenom())
+            if (memb.getNom() == membre.getNom())
             {
                 memb.effacerDonneesPerso();
             }
@@ -67,6 +64,49 @@ public class Association
     public void ajoutDonateur(Donateur donateur)
     {
         listeDonateurs.add(donateur);
+    }
+
+    public void suppressionDonateur(Donateur donateur)
+    {
+        for (Donateur dona:listeDonateurs)
+        {
+            if (dona.getNom() == donateur.getNom())
+            {
+                listeDonateurs.remove(dona);
+                break;
+            }
+        }
+    }
+
+    public void payerFacture(double facture)
+    {
+        if(solde - facture >= 0)
+        {
+            solde -= facture;
+            depenses += facture;
+            rapportActivite.append("Reglement d'une facture d'un montant de " + facture + "\n");
+        }
+    }
+
+    public void defrayer(Membre membre, int montant)
+    {
+        if(solde - montant >= 0)
+        {
+            solde -= montant;
+            depenses += montant;
+            rapportActivite.append("Defraiement de " + membre.getNom() + " d'un montant de " + montant + "\n");
+        }
+    }
+
+    public StringBuilder recetteMembre(Membre membre)
+    {
+        StringBuilder cotisation = new StringBuilder("Cotisations annuelles de " + membre.getNom() + " :\n");
+        //for (String montant:membre.getCotisation())
+        {
+
+        }
+
+        return cotisation;
     }
 
 
@@ -93,4 +133,6 @@ dépense (à incrémenter à chaque modif)
 StringBuilder avec historique des dépenses/ recettes (rapport d'activité) avec au début une synthèse de l'exercice précédent
 array des recommandations
 array visites programmées
+
+s'inscrire à la liste du service des espaces verts
  */
