@@ -6,5 +6,6 @@ public class President extends Membre
     {
         super(nom, datenaissance, adresse, datePremiereInscription, association);
         super.setEstPresident(true);
+        association.ajoutPresident(this);
     }
 }

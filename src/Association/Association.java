@@ -17,15 +17,19 @@ public class Association
     private int annee;
     public StringBuilder messagerie;
 
-    public Association(String nom, President president)
+    public Association(String nom)
     {
         this.nom = nom;
-        this.president = president;
-        listeMembres.add(this.president);
         this.solde = 1000;
         this.recettes = 0;
         this.depenses = 0;
         rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
+    }
+
+    public void ajoutPresident(President president)
+    {
+        this.president = president;
+        ajoutMembre(president);
     }
 
     public String getNom()
