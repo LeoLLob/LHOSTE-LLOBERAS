@@ -3,6 +3,7 @@ package Association;
 import Municipalite.Arbre;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Membre
 {
@@ -12,7 +13,7 @@ public class Membre
     private String dateDePremiereInscription;
     private double[] cotisation;
     private boolean aPaye;
-    private ArrayList<String> listeArbre;
+    private int[] listeVotes;
     private Association association;
     private boolean estPresident;
 
@@ -23,9 +24,9 @@ public class Membre
         this.adresse = adresse;
         this.dateDePremiereInscription = datePremiereInscription;
         this.association = association;
-        this.association.ajoutMembre(this);
         this.estPresident = false;
         this.aPaye = false;
+        this.listeVotes = new int[5];
     }
 
     public void infosPersos(){
@@ -46,6 +47,10 @@ public class Membre
         return cotisation;
     }
 
+    public boolean getAPaye() {
+        return aPaye;
+    }
+
     public void setEstPresident(boolean estPresident)
     {
         this.estPresident = estPresident;
@@ -59,9 +64,36 @@ public class Membre
         dateDePremiereInscription = "";
     }
 
-    public void ecritureCompterendu(String compteRendu, Arbre arbre)
+    public boolean demanderVisite(Arbre arbre, int annee, int mois, int jour)
     {
+        @Deprecated
+        Date date = new Date(annee, mois, jour);
+        boolean rep = this.association.ajoutVisiteProgrammee(this, arbre, date);
+        if(rep)
+        {
+            this.association.defrayer(this, 1.90);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
+    public void ecritureCompterendu(String compteRendu, Arbre arbre, int annee, int mois, int jour)
+    {
+        @Deprecated
+        Date date = new Date(annee, mois, jour);
+        arbre.ajoutCompteRendu(compteRendu, date);
+    }
+
+    public void proposerVote(int vote)
+    {
+        for(int i = 1; i<4 ; i++)
+        {
+            listeVotes[i-1] = listeVotes[i];
+        }
+        listeVotes[4] = vote;
     }
 
 

@@ -2,6 +2,7 @@ package Municipalite;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Arbre{
 
@@ -15,7 +16,20 @@ public class Arbre{
     private String stadedeveloppement;
     private Boolean estRemarquable;
     private String geo_point_2d;
-    private ArrayList<String[]> listeComptesRendus;
+    private ArrayList<CompteRendu> listeComptesRendus;
+
+    private class CompteRendu
+    {
+        public String resume;
+        Date date;
+
+        public CompteRendu(String texte, Date date)
+        {
+            this.resume = texte;
+            this.date = date;
+        }
+    }
+
 
     public Arbre(int id, String genre, String espece, String libellefrancais, int circonference, int hauteur,
                  String stadedeveloppement, String adresse, String geo_point_2d, boolean estRemarquable){
@@ -73,6 +87,12 @@ public class Arbre{
 
     public void setEstRemarquable(Boolean estRemarquable) {
         this.estRemarquable = estRemarquable;
+    }
+
+    public void ajoutCompteRendu(String resume, Date date)
+    {
+        CompteRendu compteRendu = new CompteRendu(resume, date);
+        listeComptesRendus.add(compteRendu);
     }
 }
 

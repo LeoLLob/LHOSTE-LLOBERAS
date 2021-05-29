@@ -10,26 +10,26 @@ public class ServiceEspacesVerts {
     private ArrayList<Association> listAssociations;
 
     public void notificationAbatage(int id){
-        StringBuilder notification = new StringBuilder();
-        notification.append("L'arbre numéro " + id + "à été abattu.");
+        String notification;
+        notification = ("L'arbre numéro " + id + "à été abattu.");
         for(Association association: this.listAssociations) {
-            association.messagerie.append(notification);
+            association.messagerie.add(notification);
         }
     }
 
     public void notificationClassification(int id){
-        StringBuilder notification = new StringBuilder();
-        notification.append("L'arbre numéro " + id + "à été classifié.");
+        String notification;
+        notification = ("L'arbre numéro " + id + "à été classifié.");
         for(Association association: this.listAssociations) {
-            association.messagerie.append(notification);
+            association.messagerie.add(notification);
         }
     }
 
     public void notificationPlantation(int id){
-        StringBuilder notification = new StringBuilder();
-        notification.append("Un nouvelle arbre à été planté, son numéro est le " + id + ".");
+        String notification;
+        notification = ("Un nouvelle arbre à été planté, son numéro est le " + id + ".");
         for(Association association: this.listAssociations) {
-            association.messagerie.append(notification);
+            association.messagerie.add(notification);
         }
     }
 

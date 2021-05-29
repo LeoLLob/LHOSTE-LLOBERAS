@@ -3,6 +3,7 @@ package Association;
 import Municipalite.Arbre;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Association
 {
@@ -17,18 +18,20 @@ public class Association
     private ArrayList<Visite> visitesRemarquables;
     private StringBuilder rapportActivite;
     private int annee;
-    public StringBuilder messagerie;
+    public ArrayList<String> messagerie;
 
     private class Visite
     {
         public Membre membre;
         public Arbre arbre;
-        public String compteRendu;
+        public Date date;
 
-        public Visite(Membre membre, Arbre arbre)
+        @Deprecated
+        public Visite(Membre membre, Arbre arbre, Date date)
         {
             this.membre = membre;
             this.arbre = arbre;
+            this.date = new Date(date.getYear(), date.getMonth(), date.getDate());
         }
     }
 
@@ -43,7 +46,8 @@ public class Association
         this.listeMembres = new ArrayList();
         this.recommandationsMembres = new ArrayList();
         this.visitesRemarquables = new ArrayList();
-        rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
+        this.rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
+        this.messagerie = new ArrayList<>();
     }
 
     public void ajoutPresident(President president)
@@ -83,10 +87,14 @@ public class Association
 
     /**
      * Permet d'ajouter un nouveau membre à la liste des membres.
-     * @param membre Le nouveau membre à ajouter
+     * @param nom Le nouveau membre à ajouter
+     * @param dateNaissance La date de naissance du membre
+     * @param adresse l'adresse du membre
+     * @param datePremiereInscription date de son inscription
      */
-    public void ajoutMembre(Membre membre)
+    public void ajoutMembre(String nom, String dateNaissance, String adresse, String datePremiereInscription)
     {
+        Membre membre = new Membre(nom, dateNaissance, adresse, datePremiereInscription, this);
         listeMembres.add(membre);
     }
 
@@ -136,7 +144,7 @@ public class Association
         }
     }
 
-    public void defrayer(Membre membre, int montant)
+    public void defrayer(Membre membre, double montant)
     {
         if(solde - montant >= 0)
         {
@@ -159,24 +167,48 @@ public class Association
         return cotisation;
     }
 
-    public void ajoutVisiteProgrammee(Membre membre, Arbre arbre)
+    public boolean ajoutVisiteProgrammee(Membre membre, Arbre arbre, Date date)
     {
-        Visite newVisite = new Visite(membre, arbre);
+        Visite newVisite = new Visite(membre, arbre, date);
         boolean dejaVisite = false;
         for (Visite visite:visitesRemarquables)
         {
             if(visite.arbre.getId() == arbre.getId())
             {
-                dejaVisite = true;
-                break;
+                return false;
             }
         }
-        if (!dejaVisite)
-        {
             visitesRemarquables.add(newVisite);
+            return true;
+    }
+
+    public void afficherNouveauxMessages()
+    {
+        if(messagerie == null)
+        {
+            System.out.println("pas de nouveau message");
+        }
+        else
+        {
+            for (String message:messagerie)
+            {
+                System.out.println(message);
+            }
+            messagerie = new ArrayList<>();
         }
     }
 
+    public void finExerciceBudgetaire()
+    {
+        for (Membre membre:listeMembres)
+        {
+            if(!membre.getAPaye())
+            {
+                System.out.println(membre.getNom());
+                listeMembres.remove(membre);
+            }
+        }
+    }
 
 
 
