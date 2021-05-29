@@ -13,6 +13,10 @@ public class Municipalite {
     ArrayList<Arbre> listArbresRemarquables;
     ArrayList<Arbre> listArbresNonRemarquables;
 
+    /**
+     * Permet de créer une municipalité.
+     * @param path le chemin d'accès au fichier .csv contenant la liste des arbres
+     */
      public Municipalite(String path){
 
          String line = "";
@@ -38,7 +42,7 @@ public class Municipalite {
              String genre = Line[9];
              String espece = Line[10];
              String libelleFrancais = Line[8];
-             int circunference = Integer.parseInt(Line[12]);
+             int circonference = Integer.parseInt(Line[12]);
              int hauteur = Integer.parseInt(Line[13]);
              String stadeDeDeveloppement = Line[14];
              String adresse = Line[4] + " " + Line[6] + " " + Line[3];
@@ -50,7 +54,7 @@ public class Municipalite {
                  estRemarquable = false;
              }
 
-             Arbre arbre = new Arbre(id, genre, espece, libelleFrancais, circunference, hauteur, stadeDeDeveloppement,
+             Arbre arbre = new Arbre(id, genre, espece, libelleFrancais, circonference, hauteur, stadeDeDeveloppement,
                      adresse, geo_point_2d, estRemarquable);
 
 
@@ -61,9 +65,13 @@ public class Municipalite {
          this.listArbresNonRemarquables = setNonRemarquable();
      }
 
+    /**
+     * Permet de créer un tableau contenant les arbres remarquables.
+     * @return la liste contenant les arbres remarquables
+     */
     public ArrayList<Arbre> setRemarquable(){
 
-        ArrayList<Arbre  > arbresRemarquables = new ArrayList<>();
+        ArrayList<Arbre> arbresRemarquables = new ArrayList<>();
 
         for(Arbre arbre : this.listArbres){
             if( arbre.getEstRemarquable()){
@@ -72,7 +80,10 @@ public class Municipalite {
         }
         return arbresRemarquables;
     }
-
+    /**
+     * Permet de créer un tableau contenant les arbres non remarquables.
+     * @return la liste contenant les arbres non remarquables
+     */
     public ArrayList<Arbre> setNonRemarquable(){
 
         ArrayList<Arbre  > arbresNonRemarquables = new ArrayList<>();
@@ -85,18 +96,34 @@ public class Municipalite {
         return arbresNonRemarquables;
     }
 
+    /**
+     * Permet de récupérer le tableau contenant les arbres.
+     * @return la liste contenant les arbres
+     */
     public ArrayList<Arbre> getListArbres() {
         return listArbres;
     }
 
+    /**
+     * Permet de récupérer le tableau contenant les arbres remarquables.
+     * @return la liste contenant les arbres remarquables
+     */
     public ArrayList<Arbre> getListArbresRemarquables() {
         return listArbresRemarquables;
     }
 
+    /**
+     * Permet récupérer le tableau contenant les arbres non remarquables.
+     * @return la liste contenant les arbres non remarquables
+     */
     public ArrayList<Arbre> getListArbresNonRemarquables() {
         return listArbresNonRemarquables;
     }
 
+    /**
+     * Définit la méthode toString de la liste contenant les arbres.
+     * @param arbres le tableau des arbres
+     */
     public void toString(ArrayList<Arbre> arbres){
         StringBuilder  afficheArbres = new StringBuilder();
         for(Arbre arbre: arbres) {
@@ -107,6 +134,19 @@ public class Municipalite {
         }
         System.out.println(afficheArbres);
     }
+
+    /**
+     * Permet de planter un nouvel arbre.
+     * @param serviceEspacesVerts le service qui envoie la notification
+     * @param id l'id du nouvel arbre à ajouter
+     * @param genre le genre de l'arbre
+     * @param espece l'espèce de l'arbre
+     * @param libellefrancais le nom de l'arbre
+     * @param circonference la circonference de l'arbre en cm
+     * @param hauteur la hauteur de l'arbre en m
+     * @param adresse l'adresse de l'arbre
+     * @param geo_point_2d les coordonnées GPS de l'arbre
+     */
 
     public void plantation(ServiceEspacesVerts serviceEspacesVerts, int id, String genre, String espece, String libellefrancais,
                            int circonference, int hauteur, String adresse, String geo_point_2d)
@@ -128,6 +168,11 @@ public class Municipalite {
 
      }
 
+    /**
+     * Permet d'abattre un arbre.
+     * @param serviceEspacesVerts le service qui envoie la notification
+     * @param id l'id de l'arbre à abattre
+     */
     public void abattage(ServiceEspacesVerts serviceEspacesVerts, int id){
         for(Arbre arbre:this.listArbres){
             if(arbre.getId() == id){
@@ -137,9 +182,14 @@ public class Municipalite {
         }
         this.setRemarquable();
         this.setNonRemarquable();
-        serviceEspacesVerts.notificationAbatage(id);
+        serviceEspacesVerts.notificationAbattage(id);
     }
 
+    /**
+     * Permet de classifier un arbre.
+     * @param serviceEspacesVerts le service qui envoie la notification
+     * @param id l'id de l'arbre à classifier
+     */
     public void classification(ServiceEspacesVerts serviceEspacesVerts, int id){
         for(Arbre arbre:this.listArbres){
             if(arbre.getId() == id){

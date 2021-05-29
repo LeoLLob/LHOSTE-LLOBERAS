@@ -121,7 +121,7 @@ public class Main {
 
                         String quoiA = entree.nextLine();
                         if (quoiA.equals("fin")) {
-                            viveLesArbres.finExerciceBudgetaire();
+                            viveLesArbres.finExerciceBudgetaire(serviceEspacesVertsDeParis);
                         } else if (quoiA.equals("inscrire")) {
                             System.out.println("Inscription\n" +
                                     "Nom ?");
