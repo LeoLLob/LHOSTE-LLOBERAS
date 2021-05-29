@@ -40,7 +40,7 @@ public class Main {
                             if (membre.getNom().equals(nom)) {
                                 while (!menu) {
                                     System.out.println("Que voulez-vous faire ?\n" +
-                                            " Information Personnelles -> infos"+
+                                            " Information Personnelles -> infos\n"+
                                             " Menu Principal -> menu");
                                     String quoi = entree.nextLine();
 
@@ -116,7 +116,7 @@ public class Main {
                                 " Paiement d'une facture -> paiement\n" +
                                 " Ajouter un donateur -> ajout\n" +
                                 " Suppression d'un donateur -> suppression\n" +
-                                " Acceder à la messagerie -> messagerie" +
+                                " Acceder à la messagerie -> messagerie\n" +
                                 " Menu Principal -> menu");
 
                         String quoiA = entree.nextLine();
