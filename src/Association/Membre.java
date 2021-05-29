@@ -15,15 +15,22 @@ public class Membre extends Association{
     private boolean estInscrit;
     private ArrayList<String> listeArbre;
 
-    private StringBuilder infosPersos(){
+    public void infosPersos(){
         StringBuilder infosPersos = new StringBuilder();
         infosPersos.append("NOM : " + nom);
-        infosPersos.append("Prenom : " + prenom);
-        infosPersos.append("Date de naissance : " + dateDeNaissance);
-        infosPersos.append("Adresse : " + adresse);
-        infosPersos.append("Date 1ere inscripton : " + dateDePremiereInscription);
-        return infosPersos;
+        infosPersos.append("\nPrenom : " + prenom);
+        infosPersos.append("\nDate de naissance : " + dateDeNaissance);
+        infosPersos.append("\nAdresse : " + adresse);
+        infosPersos.append("\nDate 1ere inscripton : " + dateDePremiereInscription);
+        System.out.println(infosPersos);
     }
 
 
 }
+
+/*
+méthodes :
+envoyer liste recommandation arbres remarquables (ajouter id pour pouvoir modifier)
+modifier liste de recommandation
+demander visite
+ */
