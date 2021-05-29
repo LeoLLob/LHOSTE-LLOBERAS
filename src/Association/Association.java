@@ -14,11 +14,12 @@ public class Association
     private double solde;
     private double recettes;
     private double depenses;
-    private ArrayList<int[]> recommandationsMembres;
+    private int[] recommandationsMembres;
     private ArrayList<Visite> visitesRemarquables;
     private StringBuilder rapportActivite;
     private int annee;
     public ArrayList<String> messagerie;
+    private ArrayList<Vote> listeVoix;
 
     private class Visite
     {
@@ -56,15 +57,17 @@ public class Association
         this.depenses = 0;
         this.listeDonateurs = new ArrayList();
         this.listeMembres = new ArrayList();
-        this.recommandationsMembres = new ArrayList();
+        this.recommandationsMembres = new int[5];
         this.visitesRemarquables = new ArrayList();
         this.rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
         this.messagerie = new ArrayList<>();
+        this.listeVoix = new ArrayList<>();
     }
 
     public void ajoutPresident(President president)
     {
         this.president = president;
+        listeMembres.add(president);
     }
 
     public String getNom()
@@ -80,7 +83,7 @@ public class Association
         return listeDonateurs;
     }
 
-    public ArrayList<int[]> getRecommandationsMembres() {
+    public int[] getRecommandationsMembres() {
         return recommandationsMembres;
     }
 
@@ -223,10 +226,24 @@ public class Association
                         " partie de l'association" + this.nom + "\n");
                 listeMembres.remove(membre);
             }
-            for (int vote:membre.getListeVotes())
+            for (int voteMembre:membre.getListeVotes())
             {
-
+                boolean estDejaNomine = false;
+                for (Vote vote:listeVoix)
+                {
+                    if (vote.id == voteMembre)
+                    {
+                        vote.voix++;
+                        estDejaNomine = true;
+                    }
+                }
+                if (!estDejaNomine)
+                {
+                    Vote newVote = new Vote(voteMembre);
+                    listeVoix.add(newVote);
+                }
             }
+
         }
     }
 

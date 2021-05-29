@@ -3,7 +3,6 @@ package Association;
 import Municipalite.Arbre;
 import Municipalite.Municipalite;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Membre
@@ -94,19 +93,29 @@ public class Membre
 
     public void proposerVote(int vote, Municipalite ville)
     {
-        for (Arbre arbre: ville.getRemarquable())
+        boolean estRemarquable = false;
+        for (Arbre arbre: ville.getListArbres())
         {
             if(vote == arbre.getId())
             {
-
+                if(arbre.getEstRemarquable())
+                {
+                    System.out.println("L'arbre pour lequel vous votez est déjà remarquable");
+                    break;
+                }
+                else
+                {
+                    for(int i = 1; i<4 ; i++)
+                    {
+                        listeVotes[i-1] = listeVotes[i];
+                    }
+                    listeVotes[4] = vote;
+                    System.out.println("Votre vote a été pris en compte\n");
+                    break;
+                }
             }
         }
-
-        for(int i = 1; i<4 ; i++)
-        {
-            listeVotes[i-1] = listeVotes[i];
-        }
-        listeVotes[4] = vote;
+        System.out.println("L'arbre "+ vote + " n'existe pas");
     }
 
 

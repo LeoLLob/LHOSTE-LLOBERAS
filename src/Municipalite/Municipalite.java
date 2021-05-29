@@ -1,6 +1,5 @@
 package Municipalite;
 
-import Association.Association;
 import ServiceEspaceVert.ServiceEspacesVerts;
 
 import java.io.BufferedReader;
@@ -58,11 +57,11 @@ public class Municipalite {
              this.listArbres.add(arbre);
 
          }
-         this.listArbresRemarquables = getRemarquable();
-         this.listArbresNonRemarquables = getNonRemarquable();
+         this.listArbresRemarquables = setRemarquable();
+         this.listArbresNonRemarquables = setNonRemarquable();
      }
 
-    public ArrayList<Arbre> getRemarquable(){
+    public ArrayList<Arbre> setRemarquable(){
 
         ArrayList<Arbre  > arbresRemarquables = new ArrayList<>();
 
@@ -74,7 +73,7 @@ public class Municipalite {
         return arbresRemarquables;
     }
 
-    public ArrayList<Arbre> getNonRemarquable(){
+    public ArrayList<Arbre> setNonRemarquable(){
 
         ArrayList<Arbre  > arbresNonRemarquables = new ArrayList<>();
 
@@ -84,6 +83,10 @@ public class Municipalite {
             }
         }
         return arbresNonRemarquables;
+    }
+
+    public ArrayList<Arbre> getListArbres() {
+        return listArbres;
     }
 
     public void toString(ArrayList<Arbre> arbres){
@@ -124,8 +127,8 @@ public class Municipalite {
                 break;
             }
         }
-        this.getRemarquable();
-        this.getNonRemarquable();
+        this.setRemarquable();
+        this.setNonRemarquable();
         serviceEspacesVerts.notificationAbatage(id);
     }
 
@@ -136,8 +139,8 @@ public class Municipalite {
                 break;
             }
         }
-        this.getRemarquable();
-        this.getNonRemarquable();
+        this.setRemarquable();
+        this.setNonRemarquable();
         serviceEspacesVerts.notificationClassification(id);
     }
 
