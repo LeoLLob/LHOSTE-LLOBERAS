@@ -35,6 +35,18 @@ public class Association
         }
     }
 
+    private class Vote
+    {
+        public int id;
+        public int voix;
+
+        public Vote(int idArbre)
+        {
+            this.id = idArbre;
+            this.voix = 1;
+        }
+    }
+
 
     public Association(String nom)
     {
@@ -115,10 +127,11 @@ public class Association
 
     /**
      * Permet d'ajouter un nouveau donateur à la liste des donateurs.
-     * @param donateur Le nouveau donateur à ajouter
+     * @param nom Le nom du nouveau donateur à ajouter
      */
-    public void ajoutDonateur(Donateur donateur)
+    public void ajoutDonateur(String nom)
     {
+        Donateur donateur = new Donateur(nom);
         listeDonateurs.add(donateur);
     }
 
@@ -128,10 +141,12 @@ public class Association
         {
             if (dona.getNom() == donateur.getNom())
             {
+                System.out.println(dona.getNom() + " a été enlevé de la liste des donateurs");
                 listeDonateurs.remove(dona);
                 break;
             }
         }
+        System.out.println(donateur.getNom() + " n'a pas été trouvé dans la liste des donateurs");
     }
 
     public void payerFacture(double facture)
@@ -204,8 +219,13 @@ public class Association
         {
             if(!membre.getAPaye())
             {
-                System.out.println(membre.getNom());
+                System.out.println(membre.getNom() + " n'a pas payé sa cotisation et ne fait donc plus" +
+                        " partie de l'association" + this.nom + "\n");
                 listeMembres.remove(membre);
+            }
+            for (int vote:membre.getListeVotes())
+            {
+
             }
         }
     }

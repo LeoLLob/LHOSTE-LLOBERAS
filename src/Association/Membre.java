@@ -1,6 +1,7 @@
 package Association;
 
 import Municipalite.Arbre;
+import Municipalite.Municipalite;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +52,10 @@ public class Membre
         return aPaye;
     }
 
+    public int[] getListeVotes() {
+        return listeVotes;
+    }
+
     public void setEstPresident(boolean estPresident)
     {
         this.estPresident = estPresident;
@@ -87,8 +92,16 @@ public class Membre
         arbre.ajoutCompteRendu(compteRendu, date);
     }
 
-    public void proposerVote(int vote)
+    public void proposerVote(int vote, Municipalite ville)
     {
+        for (Arbre arbre: ville.getRemarquable())
+        {
+            if(vote == arbre.getId())
+            {
+
+            }
+        }
+
         for(int i = 1; i<4 ; i++)
         {
             listeVotes[i-1] = listeVotes[i];

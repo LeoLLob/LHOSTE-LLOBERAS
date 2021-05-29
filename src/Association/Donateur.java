@@ -5,42 +5,17 @@ import java.util.ArrayList;
 public class Donateur
 {
     private String nom;
-    private ArrayList<Association> listeAssociations;
+    private boolean estInscrit;
+
+    public Donateur(String nom)
+    {
+        this.nom = nom;
+    }
 
 
     public String getNom()
     {
         return nom;
-    }
-
-    public void inscriptionAsso(Association association)
-    {
-        boolean inscrit = false;
-        for (Association asso:listeAssociations)
-        {
-            if(asso.getNom() == association.getNom())
-            {
-                inscrit = true;
-                break;
-            }
-        }
-        if (!inscrit)
-        {
-            listeAssociations.add(association);
-            association.ajoutDonateur(this);
-        }
-    }
-
-    public void desincriptionAsso(Association association)
-    {
-        for (Association asso:listeAssociations)
-        {
-            if (asso.getNom() == association.getNom())
-            {
-                asso.suppressionDonateur(this);
-                listeAssociations.remove(asso);
-            }
-        }
     }
 
 }
