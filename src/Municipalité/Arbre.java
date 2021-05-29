@@ -28,27 +28,43 @@ public class Arbre{
 
         String line = "";
         String[] arbre = {""};
+        ArrayList<String[] > arbresTemp = new ArrayList<>();
         ArrayList<String[] > arbres = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             while((line = bufferedReader.readLine()) != null){
                 arbre = line.split(";");
-                arbres.add(arbre);
+                arbresTemp.add(arbre);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }catch (IOException e) {
             e.printStackTrace();
         }
+        for(String[] fullLine: arbresTemp){
+            String[] reducedLine = new String[10];
+            reducedLine[0] = fullLine[0];
+            reducedLine[1] = fullLine[9];
+            reducedLine[2] = fullLine[10];
+            reducedLine[3] = fullLine[8];
+            reducedLine[4] = fullLine[12] + " cm";
+            reducedLine[5] = fullLine[13] + " m";
+            reducedLine[6] = fullLine[14];
+            reducedLine[7] = fullLine[4] + " " + fullLine[6] + " " + fullLine[3];
+            reducedLine[8] = fullLine[16];
+            reducedLine[9] = fullLine[15];
+            arbres.add(reducedLine);
+        }
+
+
         return arbres;
     }
 
 
     public static ArrayList<String[]> getRemarquable(ArrayList<String[]> arbres){
-
         ArrayList<String[] > arbresRemarquables = new ArrayList<>();
         for(String[] line: arbres){
-            if(line[15] == ""){
+            if(line[9] == ""){
                 arbresRemarquables.add(line);
             }
         }
@@ -58,7 +74,7 @@ public class Arbre{
     public static ArrayList<String[]> getNonRemarquable(ArrayList<String[]> arbres){
         ArrayList<String[] > arbresNonRemarquables = new ArrayList<>();
         for(String[] line: arbres){
-            if(line[15] != ""){
+            if(line[9] != ""){
                 arbresNonRemarquables.add(line);
             }
         }
@@ -84,7 +100,7 @@ public class Arbre{
         ArrayList<String[]>  arbres = Arbre.getArbres("les-arbres.csv");
         ArrayList<String[]>  arbresRemarquables = Arbre.getRemarquable(arbres);
         ArrayList<String[]>  arbresNonRemarquables = Arbre.getNonRemarquable(arbres);
-       arbre.toString(arbresNonRemarquables);
+        arbre.toString(arbres);
 
 
     }

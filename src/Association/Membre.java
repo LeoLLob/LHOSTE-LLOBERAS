@@ -15,5 +15,15 @@ public class Membre extends Association{
     private boolean estInscrit;
     private ArrayList<String> listeArbre;
 
+    private StringBuilder infosPersos(){
+        StringBuilder infosPersos = new StringBuilder();
+        infosPersos.append("NOM : " + nom);
+        infosPersos.append("Prenom : " + prenom);
+        infosPersos.append("Date de naissance : " + dateDeNaissance);
+        infosPersos.append("Adresse : " + adresse);
+        infosPersos.append("Date 1ere inscripton : " + dateDePremiereInscription);
+        return infosPersos;
+    }
+
 
 }
