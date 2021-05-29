@@ -55,6 +55,27 @@ public class Arbre{
         return arbresRemarquables;
     }
 
+    public static ArrayList<String[]> getNonRemarquable(ArrayList<String[]> arbres){
+        ArrayList<String[] > arbresNonRemarquables = new ArrayList<>();
+        for(String[] line: arbres){
+            if(line[15] != ""){
+                arbresNonRemarquables.add(line);
+            }
+        }
+        return arbresNonRemarquables;
+    }
+
+    public void toString(ArrayList<String[]> arbres){
+        int i = 0;
+        for(String[] line: arbres) {
+            for (String string : line) {
+                System.out.print(string + "; ");
+            }
+            System.out.println();
+            i++;
+        }
+        System.out.println(i);
+    }
 
 
 
@@ -62,13 +83,9 @@ public class Arbre{
         Arbre arbre = new Arbre();
         ArrayList<String[]>  arbres = Arbre.getArbres("les-arbres.csv");
         ArrayList<String[]>  arbresRemarquables = Arbre.getRemarquable(arbres);
-        for(String[] line: arbresRemarquables){
-            for(String string:line){
-                System.out.print(string + "; ");
-            }
-        System.out.println();
+        ArrayList<String[]>  arbresNonRemarquables = Arbre.getNonRemarquable(arbres);
+        arbre.toString(arbresNonRemarquables);
 
-        }
 
     }
 
