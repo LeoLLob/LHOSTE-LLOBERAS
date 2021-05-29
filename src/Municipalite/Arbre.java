@@ -68,6 +68,10 @@ public class Arbre{
     public String getGeo_point_2d() {
         return geo_point_2d;
     }
+
+    public void setEstRemarquable(Boolean estRemarquable) {
+        this.estRemarquable = estRemarquable;
+    }
 }
 
 /*

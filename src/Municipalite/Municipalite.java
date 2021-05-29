@@ -1,6 +1,7 @@
 package Municipalite;
 
 import Association.Association;
+import ServiceEspaceVert.ServiceEspacesVerts;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -57,15 +58,15 @@ public class Municipalite {
              this.listArbres.add(arbre);
 
          }
-         this.listArbresRemarquables = getRemarquable(this.listArbres);
-         this.listArbresNonRemarquables = getNonRemarquable(this.listArbres);
+         this.listArbresRemarquables = getRemarquable();
+         this.listArbresNonRemarquables = getNonRemarquable();
      }
 
-    public ArrayList<Arbre> getRemarquable(ArrayList<Arbre> listArbres){
+    public ArrayList<Arbre> getRemarquable(){
 
         ArrayList<Arbre  > arbresRemarquables = new ArrayList<>();
 
-        for(Arbre arbre : listArbres){
+        for(Arbre arbre : this.listArbres){
             if( arbre.getEstRemarquable()){
                 arbresRemarquables.add(arbre);
             }
@@ -73,11 +74,11 @@ public class Municipalite {
         return arbresRemarquables;
     }
 
-    public ArrayList<Arbre> getNonRemarquable(ArrayList<Arbre> listArbres){
+    public ArrayList<Arbre> getNonRemarquable(){
 
         ArrayList<Arbre  > arbresNonRemarquables = new ArrayList<>();
 
-        for(Arbre arbre : listArbres){
+        for(Arbre arbre : this.listArbres){
             if( arbre.getEstRemarquable() == false){
                 arbresNonRemarquables.add(arbre);
             }
@@ -96,21 +97,48 @@ public class Municipalite {
         System.out.println(afficheArbres);
     }
 
-   /* public void plantation(Municipalite municipalité, int id, String genre, String espece, String libellefrancais, int circonference, int hauteur,
-                           String adresse, String geo_point_2d){
-         Arbre nouvelArbre = new Arbre(id, genre, espece, libellefrancais, circonference, hauteur,
-                 "Jeune (arbre)", adresse, geo_point_2d, false);
+    public void plantation(ServiceEspacesVerts serviceEspacesVerts, int id, String genre, String espece, String libellefrancais,
+                           int circonference, int hauteur, String adresse, String geo_point_2d)
+    {
+         for(Arbre arbre:this.listArbres){
+             if(arbre.getId() == id){
+                 System.out.println("ID déja existant");
+                 break;
+             }else{
+                 Arbre nouvelArbre = new Arbre(id, genre, espece, libellefrancais, circonference, hauteur,
+                         "Jeune (arbre)", adresse, geo_point_2d, false);
 
-        municipalité.listArbres.add(nouvelArbre);
-        municipalité.listArbresNonRemarquables.add(nouvelArbre);
-        SeviceEspaceVert.notifcationPlantation(SeviceEspaceVert.listAssossiations associations, Arbre arbre);
+                 this.listArbres.add(nouvelArbre);
+                 this.listArbresNonRemarquables.add(nouvelArbre);
+                 serviceEspacesVerts.notificationPlantation(id);
+                 break;
+             }
+         }
+
+     }
+
+    public void abattage(ServiceEspacesVerts serviceEspacesVerts, int id){
+        for(Arbre arbre:this.listArbres){
+            if(arbre.getId() == id){
+                this.listArbres.remove(arbre);
+                break;
+            }
+        }
+        this.getRemarquable();
+        this.getNonRemarquable();
+        serviceEspacesVerts.notificationAbatage(id);
     }
-*/
 
-    public static void main(String[] args){
-        Municipalite paris = new Municipalite("les-arbres.csv");
-        paris.toString(paris.listArbresNonRemarquables);
-
+    public void classification(ServiceEspacesVerts serviceEspacesVerts, int id){
+        for(Arbre arbre:this.listArbres){
+            if(arbre.getId() == id){
+                arbre.setEstRemarquable(true);
+                break;
+            }
+        }
+        this.getRemarquable();
+        this.getNonRemarquable();
+        serviceEspacesVerts.notificationClassification(id);
     }
 
 }
