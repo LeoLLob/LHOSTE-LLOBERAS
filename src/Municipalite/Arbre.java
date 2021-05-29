@@ -15,6 +15,7 @@ public class Arbre{
     private String stadedeveloppement;
     private Boolean estRemarquable;
     private String geo_point_2d;
+    private ArrayList<String[]> listeComptesRendus;
 
     public Arbre(int id, String genre, String espece, String libellefrancais, int circonference, int hauteur,
                  String stadedeveloppement, String adresse, String geo_point_2d, boolean estRemarquable){
@@ -28,6 +29,7 @@ public class Arbre{
         this.adresse = adresse;
         this.geo_point_2d = geo_point_2d;
         this.estRemarquable = estRemarquable;
+        this.listeComptesRendus = new ArrayList<>();
 
     }
 

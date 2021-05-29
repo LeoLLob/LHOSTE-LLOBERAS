@@ -1,5 +1,7 @@
 package Association;
 
+import Municipalite.Arbre;
+
 import java.util.ArrayList;
 
 public class Association
@@ -12,10 +14,24 @@ public class Association
     private double recettes;
     private double depenses;
     private ArrayList<int[]> recommandationsMembres;
-    private ArrayList<int[]> visitesRemarquables;
+    private ArrayList<Visite> visitesRemarquables;
     private StringBuilder rapportActivite;
     private int annee;
     public StringBuilder messagerie;
+
+    private class Visite
+    {
+        public Membre membre;
+        public Arbre arbre;
+        public String compteRendu;
+
+        public Visite(Membre membre, Arbre arbre)
+        {
+            this.membre = membre;
+            this.arbre = arbre;
+        }
+    }
+
 
     public Association(String nom)
     {
@@ -33,7 +49,6 @@ public class Association
     public void ajoutPresident(President president)
     {
         this.president = president;
-        ajoutMembre(president);
     }
 
     public String getNom()
@@ -109,12 +124,32 @@ public class Association
     public StringBuilder recetteMembre(Membre membre)
     {
         StringBuilder cotisation = new StringBuilder("Cotisations annuelles de " + membre.getNom() + " :\n");
-        for (String montant:membre.getCotisation())
+        double total = 0;
+        for (double montant:membre.getCotisation())
         {
-
+            cotisation.append(montant + "€ ");
+            total+= montant;
         }
-
+        cotisation.append("\n total = " + total + "€\n");
         return cotisation;
+    }
+
+    public void ajoutVisiteProgrammee(Membre membre, Arbre arbre)
+    {
+        Visite newVisite = new Visite(membre, arbre);
+        boolean dejaVisite = false;
+        for (Visite visite:visitesRemarquables)
+        {
+            if(visite.arbre.getId() == arbre.getId())
+            {
+                dejaVisite = true;
+                break;
+            }
+        }
+        if (!dejaVisite)
+        {
+            visitesRemarquables.add(newVisite);
+        }
     }
 
 

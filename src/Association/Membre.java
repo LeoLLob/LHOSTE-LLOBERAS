@@ -1,5 +1,7 @@
 package Association;
 
+import Municipalite.Arbre;
+
 import java.util.ArrayList;
 
 public class Membre
@@ -8,7 +10,7 @@ public class Membre
     private String dateDeNaissance;
     private String adresse;
     private String dateDePremiereInscription;
-    private String[] cotisation;
+    private double[] cotisation;
     private boolean aPaye;
     private ArrayList<String> listeArbre;
     private Association association;
@@ -40,7 +42,7 @@ public class Membre
         return nom;
     }
 
-    public String[] getCotisation() {
+    public double[] getCotisation() {
         return cotisation;
     }
 
@@ -55,6 +57,11 @@ public class Membre
         dateDeNaissance = "";
         adresse = "";
         dateDePremiereInscription = "";
+    }
+
+    public void ecritureCompterendu(String compteRendu, Arbre arbre)
+    {
+
     }
 
 
