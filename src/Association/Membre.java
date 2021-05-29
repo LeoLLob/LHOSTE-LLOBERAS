@@ -40,6 +40,10 @@ public class Membre
         return nom;
     }
 
+    public String[] getCotisation() {
+        return cotisation;
+    }
+
     public void setEstPresident(boolean estPresident)
     {
         this.estPresident = estPresident;
@@ -52,6 +56,7 @@ public class Membre
         adresse = "";
         dateDePremiereInscription = "";
     }
+
 
 }
 

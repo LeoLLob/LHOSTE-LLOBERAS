@@ -23,6 +23,10 @@ public class Association
         this.solde = 1000;
         this.recettes = 0;
         this.depenses = 0;
+        this.listeDonateurs = new ArrayList();
+        this.listeMembres = new ArrayList();
+        this.recommandationsMembres = new ArrayList();
+        this.visitesRemarquables = new ArrayList();
         rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
     }
 
@@ -105,7 +109,7 @@ public class Association
     public StringBuilder recetteMembre(Membre membre)
     {
         StringBuilder cotisation = new StringBuilder("Cotisations annuelles de " + membre.getNom() + " :\n");
-        //for (String montant:membre.getCotisation())
+        for (String montant:membre.getCotisation())
         {
 
         }
