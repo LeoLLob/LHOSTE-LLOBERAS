@@ -2,6 +2,8 @@ package Association;
 
 import Municipalité.Arbre;
 
+import java.util.ArrayList;
+
 public class Membre extends Association{
     private String nom;
     private String prenom;
@@ -11,7 +13,7 @@ public class Membre extends Association{
     private String[] cotisation;
     private boolean aPaye;
     private boolean estInscrit;
-    private Arbre[] listeArbre;
+    private ArrayList<String> listeArbre;
 
 
 }
