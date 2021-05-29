@@ -56,6 +56,31 @@ public class Association
         return nom;
     }
 
+    public ArrayList<Membre> getListeMembres() {
+        return listeMembres;
+    }
+
+    public ArrayList<Donateur> getListeDonateurs() {
+        return listeDonateurs;
+    }
+
+    public ArrayList<int[]> getRecommandationsMembres() {
+        return recommandationsMembres;
+    }
+
+    public ArrayList<Visite> getVisitesRemarquables() {
+        return visitesRemarquables;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public President getPresident() {
+        return president;
+    }
+
+
     /**
      * Permet d'ajouter un nouveau membre à la liste des membres.
      * @param membre Le nouveau membre à ajouter
