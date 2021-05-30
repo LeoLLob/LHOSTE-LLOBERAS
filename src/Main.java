@@ -65,29 +65,28 @@ public class Main {
                                         System.out.println("Reserver visite\n" +
                                                 "Quel arbre voulez-vous visiter ?\n" +
                                                 " Saisir id");
-                                        int id = entree.nextInt();
+                                        int id = Integer.parseInt(entree.nextLine());
                                         System.out.println("Saisi de la date\n" +
                                                 "année ?");
-                                        int annee = entree.nextInt();
+                                        int annee = Integer.parseInt(entree.nextLine());
                                         System.out.println("Saisi de la date\n" +
                                                 "mois ? (en chiffre)");
-                                        int mois = entree.nextInt();
+                                        int mois = Integer.parseInt(entree.nextLine());
                                         System.out.println("Saisi de la date\n" +
                                                 "jour ? ");
-                                        int jour = entree.nextInt();
+                                        int jour = Integer.parseInt(entree.nextLine()) ;
                                         paris.toString(paris.getListArbresRemarquables());
                                         for(Arbre arbre : paris.getListArbresRemarquables()){
                                             if(arbre.getId() == id){
                                                 membre.demanderVisite(arbre,annee,mois,jour);
                                                 System.out.println("\n Vous avez visité l'arbre n°" + id +
                                                         ". Veuillez écrire votre compte-rendu");
+
                                                 String rendu = entree.nextLine();
                                                 membre.ecritureCompterendu(rendu, arbre, annee, mois, jour);
 
                                             }
                                         }
-                                        System.out.println("L'arbre n°" + id + " n'existe pas.");
-
 
                                     }
 
@@ -117,9 +116,9 @@ public class Main {
                             System.out.println("libelle ?");
                             String libelleFrancais = entree.nextLine();
                             System.out.println("circonference en cm ?");
-                            int circonference = entree.nextInt();
+                            int circonference = Integer.parseInt(entree.nextLine());
                             System.out.println("hauteur en m ?");
-                            int hauteur = entree.nextInt();
+                            int hauteur = Integer.parseInt(entree.nextLine());
                             System.out.println("adresse ?");
                             String adresseArbre = entree.nextLine();
                             System.out.println("Coordonnees ?");
@@ -130,13 +129,13 @@ public class Main {
                         } else if (quoiP.equals("abattre")) {
                             System.out.println("Abattre un arbre\n" +
                                     "id ?");
-                            int id = entree.nextInt();
+                            int id = Integer.parseInt(entree.nextLine());
                             paris.abattage(serviceEspacesVertsDeParis, id);
                             paris.toString(paris.getListArbres());
                         } else if (quoiP.equals("classifier")) {
                             System.out.println("classifier un arbre\n" +
                                     "id ?");
-                            int id = entree.nextInt();
+                            int id = Integer.parseInt(entree.nextLine());
                             paris.classification(serviceEspacesVertsDeParis, id);
                             paris.toString(paris.getListArbres());
                         }
@@ -193,7 +192,7 @@ public class Main {
                         } else if (quoiA.equals("paiment")) {
                             System.out.println("Paiement facture\n" +
                                     "Quel est le montant à payer ?");
-                            int facture = entree.nextInt();
+                            int facture = Integer.parseInt(entree.nextLine());
                             viveLesArbres.payerFacture(facture);
                         } else if (quoiA.equals("ajout")) {
                             System.out.println("Ajout donateur\n" +

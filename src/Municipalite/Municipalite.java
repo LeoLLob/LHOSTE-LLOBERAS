@@ -175,13 +175,16 @@ public class Municipalite {
      */
     public void abattage(ServiceEspacesVerts serviceEspacesVerts, int id){
         for(Arbre arbre:this.listArbres){
-            if(arbre.getId() == id){
+            if(arbre.getId() == id && arbre.getEstRemarquable()){
                 this.listArbres.remove(arbre);
+                this.listArbresRemarquables.remove(arbre);
+                break;
+            }else if(arbre.getId() == id && !arbre.getEstRemarquable()){
+                this.listArbres.remove(arbre);
+                this.listArbresNonRemarquables.remove(arbre);
                 break;
             }
         }
-        this.setRemarquable();
-        this.setNonRemarquable();
         serviceEspacesVerts.notificationAbattage(id);
     }
 
@@ -194,11 +197,11 @@ public class Municipalite {
         for(Arbre arbre:this.listArbres){
             if(arbre.getId() == id){
                 arbre.setEstRemarquable(true);
+                this.listArbresNonRemarquables.remove(arbre);
+                this.listArbresRemarquables.add(arbre);
                 break;
             }
         }
-        this.setRemarquable();
-        this.setNonRemarquable();
         serviceEspacesVerts.notificationClassification(id);
     }
 
