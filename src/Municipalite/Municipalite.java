@@ -113,6 +113,14 @@ public class Municipalite {
     }
 
     /**
+     * Permet de récupérer le tableau contenant les arbres non remarquables.
+     * @return la liste contenant les arbres non remarquables
+     */
+    public ArrayList<Arbre> getListArbresNonRemarquables() {
+        return listArbresNonRemarquables;
+    }
+
+    /**
      * Définit la méthode toString de la liste contenant les arbres.
      * @param arbres le tableau des arbres
      */
