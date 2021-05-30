@@ -18,10 +18,10 @@ public class Arbre{
     private String geo_point_2d;
     private ArrayList<CompteRendu> listeComptesRendus;
 
-    private class CompteRendu
+    public class CompteRendu
     {
         public String resume;
-        Date date;
+        public Date date;
 
         /**
          * Permet de créer un compte rendu.
@@ -161,6 +161,10 @@ public class Arbre{
     {
         CompteRendu compteRendu = new CompteRendu(resume, date);
         listeComptesRendus.add(compteRendu);
+    }
+
+    public ArrayList<CompteRendu> getListeComptesRendus() {
+        return listeComptesRendus;
     }
 }
 
