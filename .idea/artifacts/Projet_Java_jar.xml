@@ -2,7 +2,7 @@
   <artifact type="jar" name="Projet Java:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Projet_Java_jar</output-path>
     <root id="archive" name="Projet Java.jar">
-      <element id="module-output" name="Projet Java" />
+      <element id="module-output" name="LHOSTE-LLOBERAS" />
     </root>
   </artifact>
 </component>
