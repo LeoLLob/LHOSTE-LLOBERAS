@@ -48,6 +48,7 @@ public class Main {
                                             " Payer cotisation -> cotisation\n" +
                                             " Reserver visite -> visite\n" +
                                             " Liste des arbres remarquables -> remarquable\n" +
+                                            " Liste des arbres non remarquables -> non remarquable\n" +
                                             " Votez pour classification -> vote\n" +
                                             " Menu Principal -> menu");
                                     String quoi = entree.nextLine();
@@ -93,7 +94,9 @@ public class Main {
 
                                     } else if (quoi.equals("remarquable")) {
                                         paris.toString(paris.getListArbresRemarquables());
-                                    } else if (quoi.equals("vote")) {
+                                    }  else if (quoi.equals("non remarquable")) {
+                                        paris.toString(paris.getListArbresNonRemarquables());
+                                    }else if (quoi.equals("vote")) {
                                         System.out.println("Proposer vote\n" +
                                                 "Quel arbre voulez-vous proposer ?\n" +
                                                 "id ?");
