@@ -71,6 +71,7 @@ public class Association
         this.depenses = 0;
         this.listeDonateurs = new ArrayList<>();
         this.listeMembres = new ArrayList<>();
+        this.recommandationsMembres = new ArrayList<>();
         initialiserVotes();
         this.visitesRemarquables = new ArrayList<>();
         this.rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");

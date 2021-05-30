@@ -15,7 +15,7 @@ public class Membre
     private String dateDePremiereInscription;
     private ArrayList<Double> cotisation;
     private boolean aPaye;
-    private int[] listeVotes;
+    private ArrayList<Integer> listeVotes;
     private final Association association;
     private boolean estPresident;
     private int nombreVisitesAnnuelle;
@@ -37,7 +37,7 @@ public class Membre
         this.association = association;
         this.estPresident = false;
         this.aPaye = false;
-        this.listeVotes = new int[5];
+        this.listeVotes = new ArrayList<>();
         this.nombreVisitesAnnuelle = 0;
         this.cotisation = new ArrayList<>();
     }
@@ -83,7 +83,7 @@ public class Membre
      * Permet de récupérer la liste des votes du membre.
      * @return l'array contenant la liste des votes
      */
-    public int[] getListeVotes() {
+    public ArrayList<Integer> getListeVotes() {
         return listeVotes;
     }
 
@@ -196,11 +196,13 @@ public class Membre
                 }
                 else
                 {
-                    for(int i = 1; i<4 ; i++)
+                    if(listeVotes.size()<5){
+                        listeVotes.add(vote);
+                    }else
                     {
-                        listeVotes[i-1] = listeVotes[i];
+                       listeVotes.remove(0);
+                       listeVotes.add(vote);
                     }
-                    listeVotes[4] = vote;
                     System.out.println("Votre vote a été pris en compte\n");
                     break;
                 }

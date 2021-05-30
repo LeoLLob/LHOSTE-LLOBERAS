@@ -58,11 +58,11 @@ public class ServiceEspacesVerts {
      */
     public void traitementNouveauxRemarquables(Municipalite municipalite)
     {
-        for (int i = 0; i< listeProchainsRemarquables.size(); i++)
+        for (int i = 0; i < listeProchainsRemarquables.size(); i++)
         {
             municipalite.classification(this, listeProchainsRemarquables.get(i));
-            listeProchainsRemarquables.remove(i);
         }
+        listeProchainsRemarquables = new ArrayList<>();
     }
 
     /**
