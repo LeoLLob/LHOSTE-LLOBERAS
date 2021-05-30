@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Municipalite paris = new Municipalite("les-arbres.csv");
+        Municipalite paris = new Municipalite("src/les-arbres.csv");
         ServiceEspacesVerts serviceEspacesVertsDeParis = new ServiceEspacesVerts();
         Association viveLesArbres = new Association("Vive les Arbres");
         serviceEspacesVertsDeParis.getListAssociations().add(viveLesArbres);
