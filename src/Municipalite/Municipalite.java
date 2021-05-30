@@ -212,6 +212,7 @@ public class Municipalite {
         {
             if(arbre.getId() == idArbre)
             {
+                existe = true;
                 for(int i = 0; i < arbre.getListeComptesRendus().size(); i++)
                 {
                     System.out.println("Rédigé le " + arbre.getListeComptesRendus().get(i).date + "\n");

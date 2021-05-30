@@ -14,7 +14,7 @@ public class Main {
         Association viveLesArbres = new Association("Vive les Arbres");
         serviceEspacesVertsDeParis.getListAssociations().add(viveLesArbres);
         President Mathis = new President("Mathis", "21/07/2000", "Fresnes", "29/05/2021", viveLesArbres);
-        Membre Leo = new Membre("Leo", "16/05/2000", "Paris", "30/05/2021", viveLesArbres);
+        viveLesArbres.ajoutMembre("Leo", "16/05/2000", "Paris", "30/05/2021");
         boolean quitter = false;
 
         while (!quitter) {
@@ -170,6 +170,7 @@ public class Main {
                             " Ajouter un donateur -> ajout\n" +
                             " Suppression d'un donateur -> suppression\n" +
                             " Acceder à la messagerie -> messagerie\n" +
+                            " Regarder compte rendu visite -> cr\n" +
                             " Menu Principal -> menu");
 
                     String quoiA = entree.nextLine();
@@ -204,7 +205,7 @@ public class Main {
                                 System.out.println(viveLesArbres.recetteMembre(membre));
                             }
                         }
-                    } else if (quoiA.equals("paiment")) {
+                    } else if (quoiA.equals("paiement")) {
                         System.out.println("Paiement facture\n" +
                                 "Quel est le montant à payer ?");
                         int facture = Integer.parseInt(entree.nextLine());
@@ -224,7 +225,14 @@ public class Main {
                         System.out.println("Messagerie");
                         viveLesArbres.afficherNouveauxMessages();
                         System.out.println();
-                    } else if (quoiA.equals("menu")) {
+                    } else if(quoiA.equals("cr")){
+                        System.out.println("Compte-rendu\n" +
+                                "De quel arbre voulez-vous le compte-rendu ?\n" +
+                                "id ?");
+                        int id = Integer.parseInt(entree.nextLine());
+                        paris.accederCommentaireArbre(id);
+
+                    }else if (quoiA.equals("menu")) {
                         menu = true;
                     }
                 }

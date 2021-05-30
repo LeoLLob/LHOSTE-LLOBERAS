@@ -191,6 +191,8 @@ public class Association
             solde = solde - facture;
             depenses = depenses + facture;
             rapportActivite.append("Reglement d'une facture d'un montant de " + facture + "€\n");
+        }else{
+            System.out.println("Solde insuffisant !");
         }
     }
 
@@ -217,6 +219,8 @@ public class Association
             solde -= montant;
             depenses += montant;
             rapportActivite.append("Defraiement de " + membre.getNom() + " d'un montant de " + montant + "\n");
+        }else{
+            System.out.println("Solde insuffisant !");
         }
     }
 
