@@ -298,8 +298,7 @@ public class Association
                 // Radiation des membres n'ayant pas payé leur cotisation
                 System.out.println(membre.getNom() + " n'a pas payé sa cotisation et ne fait donc plus" +
                         " partie de l'association" + this.nom + "\n");
-                membre.effacerDonneesPerso();
-                break;
+                this.suppressionMembre(membre);
             }
 
             // Prise en compte des votes des membres
