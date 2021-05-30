@@ -205,6 +205,31 @@ public class Municipalite {
         serviceEspacesVerts.notificationClassification(id);
     }
 
+    public void accederCommentaireArbre(int idArbre)
+    {
+        boolean existe = false;
+        for (Arbre arbre:listArbresRemarquables)
+        {
+            if(arbre.getId() == idArbre)
+            {
+                for(int i = 0; i < arbre.getListeComptesRendus().size(); i++)
+                {
+                    System.out.println("Rédigé le " + arbre.getListeComptesRendus().get(i).date + "\n");
+                    System.out.println(arbre.getListeComptesRendus().get(i).resume + "\n");
+                }
+                if(arbre.getListeComptesRendus().size() == 0)
+                {
+                    System.out.println("Cet arbre ne possède pas de compte-rendu.");
+                }
+                break;
+            }
+        }
+        if(!existe)
+        {
+            System.out.println("Cet arbre n'existe pas ou n'est pas remarquable\n");
+        }
+    }
+
 }
 
 
