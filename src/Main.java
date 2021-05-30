@@ -60,7 +60,7 @@ public class Main {
                                         System.out.println();
                                     } else if (quoi.equals("desinscrire")) {
                                         System.out.println("Desinscription");
-                                        viveLesArbres.suppressionMembre(membre);
+                                        viveLesArbres.suppressionMembre(membre.getNom());
                                     } else if (quoi.equals("cotisation")) {
                                         System.out.println("Payer cotisation");
                                         membre.payerCotisation();
@@ -151,7 +151,8 @@ public class Main {
                         int id = Integer.parseInt(entree.nextLine());
                         paris.classification(serviceEspacesVertsDeParis, id);
                         paris.toString(paris.getListArbres());
-                    } else if (quoiP.equals("proposition")) {
+                    } else if (quoiP.equals("propositions")) {
+                        System.out.println("Analyse des propositions\n");
                         serviceEspacesVertsDeParis.traitementNouveauxRemarquables(paris);
                         paris.toString(paris.getListArbresRemarquables());
                     } else if (quoiP.equals("menu")) {
@@ -176,6 +177,8 @@ public class Main {
 
                     String quoiA = entree.nextLine();
                     if (quoiA.equals("fin")) {
+                        System.out.println("Fin de l'exercice budgétaire actuel\n" +
+                                "Compte-rendu de l'année :\n");
                         viveLesArbres.finExerciceBudgetaire(serviceEspacesVertsDeParis);
                     } else if (quoiA.equals("inscrire")) {
                         System.out.println("Inscription\n" +
@@ -192,11 +195,8 @@ public class Main {
                         System.out.println("Desinscription\n" +
                                 "Nom ?");
                         String nom = entree.nextLine();
-                        for (Membre membre : viveLesArbres.getListeMembres()) {
-                            if (membre.getNom().equals(nom)) {
-                                viveLesArbres.suppressionMembre(membre);
-                            }
-                        }
+                        viveLesArbres.suppressionMembre(nom);
+
                     } else if (quoiA.equals("recette")) {
                         System.out.println("Recette\n" +
                                 "Nom ?");

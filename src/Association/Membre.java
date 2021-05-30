@@ -16,7 +16,7 @@ public class Membre
     private ArrayList<Double> cotisation;
     private boolean aPaye;
     private int[] listeVotes;
-    private Association association;
+    private final Association association;
     private boolean estPresident;
     private int nombreVisitesAnnuelle;
 
@@ -39,7 +39,7 @@ public class Membre
         this.aPaye = false;
         this.listeVotes = new int[5];
         this.nombreVisitesAnnuelle = 0;
-        this.cotisation = new ArrayList();
+        this.cotisation = new ArrayList<>();
     }
 
     /**
@@ -47,7 +47,7 @@ public class Membre
      */
     public void infosPersos(){
         StringBuilder infosPersos = new StringBuilder();
-        infosPersos.append("NOM : " + nom);;
+        infosPersos.append("NOM : " + nom);
         infosPersos.append("\nDate de naissance : " + dateDeNaissance);
         infosPersos.append("\nAdresse : " + adresse);
         infosPersos.append("\nDate 1ere inscripton : " + dateDePremiereInscription);
@@ -113,7 +113,7 @@ public class Membre
         {
             association.recevoirCotisation(this);
             aPaye = true;
-            cotisation.add(association.getMONTANTCOTISATION());
+            cotisation.add(Association.getMONTANTCOTISATION());
             System.out.println("Vous venez de régler votre cotisation\n");
         }
         else

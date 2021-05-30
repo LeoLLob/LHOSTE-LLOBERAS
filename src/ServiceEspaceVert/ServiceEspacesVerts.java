@@ -1,21 +1,20 @@
 package ServiceEspaceVert;
 
 import Association.Association;
-import Municipalite.Arbre;
 import Municipalite.Municipalite;
 
 import java.util.ArrayList;
 
 public class ServiceEspacesVerts {
-    private ArrayList<Association> listAssociations;
+    private final ArrayList<Association> listAssociations;
     private ArrayList<Integer> listeProchainsRemarquables;
 
     /**
      * Permet de créer un service espaces verts.
      */
     public ServiceEspacesVerts(){
-        this.listAssociations = new ArrayList();
-        this.listeProchainsRemarquables = new ArrayList();
+        this.listAssociations = new ArrayList<>();
+        this.listeProchainsRemarquables = new ArrayList<>();
     }
 
     /**
@@ -59,10 +58,10 @@ public class ServiceEspacesVerts {
      */
     public void traitementNouveauxRemarquables(Municipalite municipalite)
     {
-        for (int id:listeProchainsRemarquables)
+        for (int i = 0; i< listeProchainsRemarquables.size(); i++)
         {
-            municipalite.classification(this, id);
-            listeProchainsRemarquables.remove(id);
+            municipalite.classification(this, listeProchainsRemarquables.get(i));
+            listeProchainsRemarquables.remove(i);
         }
     }
 

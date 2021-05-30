@@ -1,21 +1,20 @@
 package Municipalite;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Arbre{
 
-    private int id;
-    private String adresse;
-    private String libellefrancais;
-    private String genre;
-    private String espece;
-    private int circonference;
-    private int hauteur;
-    private String stadedeveloppement;
+    private final int id;
+    private final String adresse;
+    private final String libellefrancais;
+    private final String genre;
+    private final String espece;
+    private final int circonference;
+    private final int hauteur;
+    private final String stadedeveloppement;
     private Boolean estRemarquable;
-    private String geo_point_2d;
+    private final String geo_point_2d;
     private ArrayList<CompteRendu> listeComptesRendus;
 
     public class CompteRendu
@@ -34,7 +33,6 @@ public class Arbre{
             this.date = date;
         }
     }
-
 
     /**
      * Permet de créer un arbre.
@@ -161,6 +159,7 @@ public class Arbre{
     {
         CompteRendu compteRendu = new CompteRendu(resume, date);
         listeComptesRendus.add(compteRendu);
+        System.out.println("L'arbre n°" + this.id + " a reçu un nouveau compte-rendu\n");
     }
 
     /**

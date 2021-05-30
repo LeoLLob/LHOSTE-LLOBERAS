@@ -48,7 +48,7 @@ public class Municipalite {
              String adresse = Line[4] + " " + Line[6] + " " + Line[3];
              String geo_point_2d = Line[16];
              boolean estRemarquable;
-             if(Line[15] == ""){
+             if(Line[15].equals("")){
                  estRemarquable = true;
              }else{
                  estRemarquable = false;

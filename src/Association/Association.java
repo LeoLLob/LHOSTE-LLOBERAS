@@ -28,6 +28,12 @@ public class Association
         public Arbre arbre;
         public Date date;
 
+        /**
+         * Permet de construire une nouvelle visite d'arbre remarquable.
+         * @param membre Le membre qui visite
+         * @param arbre l'arbre à visiter
+         * @param date la date de la visite
+         */
         @Deprecated
         public Visite(Membre membre, Arbre arbre, Date date)
         {
@@ -42,6 +48,10 @@ public class Association
         public int id;
         public int voix;
 
+        /**
+         * Permet de construire un nouveau vote.
+         * @param idArbre l'id de l'arbre voté
+         */
         public Vote(int idArbre)
         {
             this.id = idArbre;
@@ -49,7 +59,10 @@ public class Association
         }
     }
 
-
+    /**
+     * Permet de construire une association.
+     * @param nom le nom de la nouvelle association
+     */
     public Association(String nom)
     {
         this.nom = nom;
@@ -65,25 +78,46 @@ public class Association
         this.listeVoix = new ArrayList<>();
     }
 
+    /**
+     * Permet d'ajouter un président à l'association.
+     * @param president Le président à élire
+     */
     public void ajoutPresident(President president)
     {
         this.president = president;
         listeMembres.add(president);
     }
 
+
+    /**
+     * Permet de récupérer le nom de l'association.
+     * @return un String contenant le nom de l'association
+     */
     public String getNom()
     {
         return nom;
     }
 
+    /**
+     * Permet de récupérer la liste des membres de l'association
+     * @return un ArrayList contenant la liste des membres de l'association
+     */
     public ArrayList<Membre> getListeMembres() {
         return listeMembres;
     }
 
+    /**
+     * Permet de récupérer la liste des donateurs de l'association
+     * @return un ArrayList contenant la liste des donateurs de l'association
+     */
     public ArrayList<Donateur> getListeDonateurs() {
         return listeDonateurs;
     }
 
+    /**
+     * Permet de récupérer le montant de la cotisation fixé
+     * @return un double contenant le montant de la contisation
+     */
     public static double getMONTANTCOTISATION() {
         return MONTANTCOTISATION;
     }
@@ -103,17 +137,23 @@ public class Association
 
     /**
      * Permet de retirer un membre de la liste des membres.
-     * @param membre Le membre à retirer
+     * @param nom Le nom du membre à retirer
      */
-    public void suppressionMembre(Membre membre)
+    public void suppressionMembre(String nom)
     {
+        boolean existe = false;
         for (Membre memb:listeMembres)
         {
-            if (memb.getNom().equals(membre.getNom()))
+            if (memb.getNom().equals(nom))
             {
                 memb.effacerDonneesPerso();
+                System.out.println("Les données personnelles de ce membre ont été effacées");
+                existe = true;
+                break;
             }
         }
+        if(!existe)
+            System.out.println("le membre renseigné n'existe pas dans l'association");
     }
 
     /**
@@ -124,6 +164,7 @@ public class Association
     {
         Donateur donateur = new Donateur(nom);
         listeDonateurs.add(donateur);
+        System.out.println(nom + "a été ajouté à la liste des donateurs de l'association\n");
     }
 
     /**
@@ -295,8 +336,8 @@ public class Association
                 {
                     // Radiation des membres n'ayant pas payé leur cotisation
                     System.out.println(membre.getNom() + " n'a pas payé sa cotisation et ne fait donc plus" +
-                            " partie de l'association " + this.nom + "\n");
-                    this.suppressionMembre(membre);
+                            " partie de l'association " + this.nom);
+                    this.suppressionMembre(membre.getNom());
                 }
 
                 // Prise en compte des votes des membres
