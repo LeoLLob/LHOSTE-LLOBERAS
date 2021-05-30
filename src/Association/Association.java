@@ -55,7 +55,7 @@ public class Association
         public Vote(int idArbre)
         {
             this.id = idArbre;
-            this.voix = 1;
+            this.voix = 0;
         }
     }
 
@@ -71,7 +71,7 @@ public class Association
         this.depenses = 0;
         this.listeDonateurs = new ArrayList<>();
         this.listeMembres = new ArrayList<>();
-        this.recommandationsMembres = new ArrayList<>();
+        initialiserVotes();
         this.visitesRemarquables = new ArrayList<>();
         this.rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
         this.messagerie = new ArrayList<>();
@@ -358,6 +358,7 @@ public class Association
                         if (!estDejaNomine)
                         {
                             Vote newVote = new Vote(voteMembre);
+                            newVote.voix++;
                             listeVoix.add(newVote);
                         }
                         voteMembre = 0;
@@ -374,8 +375,6 @@ public class Association
         for (Vote vote:listeVoix)
         {
             int i = 0;
-            if(!recommandationsMembres.isEmpty())
-            {
                 for(int j = 0; j < recommandationsMembres.size(); j++)
                 {
                     if (recommandationsMembres.get(j).voix < vote.voix)
@@ -392,17 +391,13 @@ public class Association
                     }
                     recommandationsMembres.set(i, vote);
                 }
-            }
-            else
-            {
-                recommandationsMembres.add(vote);
-            }
-
         }
         // Envoi de la liste finale des votes
         envoiVotesFinaux(serviceEspacesVerts);
+
+        // Réinitialisation des voix
         listeVoix = new ArrayList<>();
-        recommandationsMembres = new ArrayList<>();
+        initialiserVotes();
 
         // Conclusion du rapport
         String message = "Récapitulatif de fin d'année : \n" +
@@ -431,8 +426,11 @@ public class Association
     {
         for (Vote vote:recommandationsMembres)
         {
-            serviceEspacesVerts.ajoutListeProchainsRemarquables(vote.id);
-            System.out.println("L'arbre numéro " + vote.id + " a été nominé pour devenir arbre remarquable\n");
+            if (vote.id != 0)
+            {
+                serviceEspacesVerts.ajoutListeProchainsRemarquables(vote.id);
+                System.out.println("L'arbre numéro " + vote.id + " a été nominé pour devenir arbre remarquable\n");
+            }
         }
     }
 
@@ -446,6 +444,18 @@ public class Association
         {
             donateur.demandesSubvention.add(montant);
             System.out.println("Une demande de subvention de " + montant + "€ a été envoyée à " + donateur.getNom());
+        }
+    }
+
+    /**
+     * Permet de réinitialiser les votes.
+     */
+    public void initialiserVotes()
+    {
+        Vote vote = new Vote(0);
+        for(int i = 0; i<5; i++)
+        {
+            recommandationsMembres.add(vote);
         }
     }
 }
