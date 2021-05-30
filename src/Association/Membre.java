@@ -210,16 +210,4 @@ public class Membre
             System.out.println("L'arbre " + vote + " n'existe pas");
         }
     }
-
-
 }
-
-/*
-méthodes :
-envoyer liste recommandation arbres remarquables (ajouter id pour pouvoir modifier)
-modifier liste de recommandation
-demander visite
-payer cotisation à son asso
-
-nom asso
- */

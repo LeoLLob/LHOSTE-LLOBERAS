@@ -163,11 +163,11 @@ public class Arbre{
         listeComptesRendus.add(compteRendu);
     }
 
+    /**
+     * Permet de renvoyer la liste des comptes rendus de l'arbre.
+     * @return un arraylist contenant la liste des comptes rendus
+     */
     public ArrayList<CompteRendu> getListeComptesRendus() {
         return listeComptesRendus;
     }
 }
-
-/*
-mettre à jour pour enregistrer chaque élément
- */

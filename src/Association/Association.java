@@ -5,11 +5,10 @@ import ServiceEspaceVert.ServiceEspacesVerts;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Association
 {
-    private String nom;
+    private final String nom;
     private President president;
     private ArrayList<Membre> listeMembres;
     private ArrayList<Donateur> listeDonateurs;
@@ -19,12 +18,11 @@ public class Association
     private ArrayList<Vote> recommandationsMembres;
     private ArrayList<Visite> visitesRemarquables;
     private StringBuilder rapportActivite;
-    private int annee;
     public ArrayList<String> messagerie;
     private ArrayList<Vote> listeVoix;
     private final static double MONTANTCOTISATION = 25;
 
-    private class Visite
+    private static class Visite
     {
         public Membre membre;
         public Arbre arbre;
@@ -39,7 +37,7 @@ public class Association
         }
     }
 
-    private class Vote
+    private static class Vote
     {
         public int id;
         public int voix;
@@ -58,10 +56,10 @@ public class Association
         this.solde = 1000;
         this.recettes = 0;
         this.depenses = 0;
-        this.listeDonateurs = new ArrayList();
-        this.listeMembres = new ArrayList();
-        this.recommandationsMembres = new ArrayList();
-        this.visitesRemarquables = new ArrayList();
+        this.listeDonateurs = new ArrayList<>();
+        this.listeMembres = new ArrayList<>();
+        this.recommandationsMembres = new ArrayList<>();
+        this.visitesRemarquables = new ArrayList<>();
         this.rapportActivite = new StringBuilder("Création association '" + nom + "' avec un solde de " + this.solde + "\n");
         this.messagerie = new ArrayList<>();
         this.listeVoix = new ArrayList<>();
@@ -84,22 +82,6 @@ public class Association
 
     public ArrayList<Donateur> getListeDonateurs() {
         return listeDonateurs;
-    }
-
-    public ArrayList<Vote> getRecommandationsMembres() {
-        return recommandationsMembres;
-    }
-
-    public ArrayList<Visite> getVisitesRemarquables() {
-        return visitesRemarquables;
-    }
-
-    public double getSolde() {
-        return solde;
-    }
-
-    public President getPresident() {
-        return president;
     }
 
     public static double getMONTANTCOTISATION() {
@@ -127,7 +109,7 @@ public class Association
     {
         for (Membre memb:listeMembres)
         {
-            if (memb.getNom() == membre.getNom())
+            if (memb.getNom().equals(membre.getNom()))
             {
                 memb.effacerDonneesPerso();
             }
@@ -176,7 +158,8 @@ public class Association
     {
         solde = solde + don;
         recettes = recettes + don;
-        rapportActivite.append("Réception d'un don d'un montant de " + don + "€ de la part de " + donateur.getNom() +"\n");
+        String message = "Réception d'un don d'un montant de " + don + "€ de la part de " + donateur.getNom() +"\n";
+        rapportActivite.append(message);
     }
 
 
@@ -190,7 +173,8 @@ public class Association
         {
             solde = solde - facture;
             depenses = depenses + facture;
-            rapportActivite.append("Reglement d'une facture d'un montant de " + facture + "€\n");
+            String message = "Reglement d'une facture d'un montant de " + facture + "€\n";
+            rapportActivite.append(message);
         }else{
             System.out.println("Solde insuffisant !");
         }
@@ -204,7 +188,8 @@ public class Association
     {
         solde = solde + MONTANTCOTISATION;
         recettes = recettes + MONTANTCOTISATION;
-        rapportActivite.append(membre.getNom() + " a payé sa cotisation\n");
+        String message = membre.getNom() + " a payé sa cotisation\n";
+        rapportActivite.append(message);
     }
 
     /**
@@ -218,7 +203,8 @@ public class Association
         {
             solde -= montant;
             depenses += montant;
-            rapportActivite.append("Defraiement de " + membre.getNom() + " d'un montant de " + montant + "\n");
+            String message = "Defraiement de " + membre.getNom() + " d'un montant de " + montant + "\n";
+            rapportActivite.append(message);
         }else{
             System.out.println("Solde insuffisant !");
         }
@@ -233,12 +219,15 @@ public class Association
     {
         StringBuilder cotisation = new StringBuilder("Cotisations annuelles de " + membre.getNom() + " :\n");
         double total = 0;
+        String message;
         for (double montant:membre.getCotisation())
         {
-            cotisation.append(montant + "€ ");
+            message = montant + "€ ";
+            cotisation.append(message);
             total+= montant;
         }
-        cotisation.append("\n total = " + total + "€\n");
+        message = "\n total = " + total + "€\n";
+        cotisation.append(message);
         return cotisation;
     }
 
@@ -252,7 +241,6 @@ public class Association
     public boolean ajoutVisiteProgrammee(Membre membre, Arbre arbre, Date date)
     {
         Visite newVisite = new Visite(membre, arbre, date);
-        boolean dejaVisite = false;
         for (Visite visite:visitesRemarquables)
         {
             if(visite.arbre.getId() == arbre.getId())
@@ -376,9 +364,10 @@ public class Association
         recommandationsMembres = new ArrayList<>();
 
         // Conclusion du rapport
-        rapportActivite.append("Récapitulatif de fin d'année : \n" +
+        String message = "Récapitulatif de fin d'année : \n" +
                 "Recettes : " + recettes + "€\n" + "Dépenses : " + depenses + "€\n" +
-                "Solde : " + solde + "\n");
+                "Solde : " + solde + "\n";
+        rapportActivite.append(message);
         System.out.println(rapportActivite);
 
         // Ecriture nouveau rapport pour l'année suivante
@@ -390,7 +379,7 @@ public class Association
         envoiDemandesSubvention(30);
 
         // Réinitialisation des visites annuelles
-        visitesRemarquables = new ArrayList();
+        visitesRemarquables = new ArrayList<>();
     }
 
     /**
@@ -418,31 +407,4 @@ public class Association
             System.out.println("Une demande de subvention de " + montant + "€ a été envoyée à " + donateur.getNom());
         }
     }
-
-
-
-
-
 }
-
-/*
-créer méthode :
-fin ex budgétaire et tout ce qu'elle implique
-toutes les actions décrites page 4
-envoi liste des 5 arbres votés
-demander don à liste donateurs
-
-créer attributs:
-nom asso
-nom président
-solde
-liste membres
-liste donateurs
-recette (à incrémenter à chaque modif)
-dépense (à incrémenter à chaque modif)
-StringBuilder avec historique des dépenses/ recettes (rapport d'activité) avec au début une synthèse de l'exercice précédent
-array des recommandations
-array visites programmées
-
-s'inscrire à la liste du service des espaces verts
- */

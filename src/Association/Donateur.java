@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Donateur
 {
-    private String nom;
+    private final String nom;
     private boolean estInscrit;
     public ArrayList<Double> demandesSubvention;
 
@@ -16,7 +16,7 @@ public class Donateur
     public Donateur(String nom)
     {
         this.nom = nom;
-        this.demandesSubvention = new ArrayList();
+        this.demandesSubvention = new ArrayList<>();
         this.estInscrit = true;
     }
 
@@ -72,13 +72,4 @@ public class Donateur
         }
         demandesSubvention = new ArrayList<>();
     }
-
 }
-
-
-/*
-nature
-
-inscription liste donateurs
-desinscription liste donateurs
- */

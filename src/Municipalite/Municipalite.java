@@ -35,7 +35,7 @@ public class Municipalite {
          }
 
          arbres.remove(0);
-         this.listArbres = new ArrayList();
+         this.listArbres = new ArrayList<>();
 
          for(String[] Line : arbres){
              int id = Integer.parseInt(Line[0]);
@@ -89,7 +89,7 @@ public class Municipalite {
         ArrayList<Arbre  > arbresNonRemarquables = new ArrayList<>();
 
         for(Arbre arbre : this.listArbres){
-            if( arbre.getEstRemarquable() == false){
+            if(!arbre.getEstRemarquable()){
                 arbresNonRemarquables.add(arbre);
             }
         }
@@ -110,14 +110,6 @@ public class Municipalite {
      */
     public ArrayList<Arbre> getListArbresRemarquables() {
         return listArbresRemarquables;
-    }
-
-    /**
-     * Permet récupérer le tableau contenant les arbres non remarquables.
-     * @return la liste contenant les arbres non remarquables
-     */
-    public ArrayList<Arbre> getListArbresNonRemarquables() {
-        return listArbresNonRemarquables;
     }
 
     /**
@@ -147,7 +139,6 @@ public class Municipalite {
      * @param adresse l'adresse de l'arbre
      * @param geo_point_2d les coordonnées GPS de l'arbre
      */
-
     public void plantation(ServiceEspacesVerts serviceEspacesVerts, int id, String genre, String espece, String libellefrancais,
                            int circonference, int hauteur, String adresse, String geo_point_2d)
     {
@@ -205,6 +196,10 @@ public class Municipalite {
         serviceEspacesVerts.notificationClassification(id);
     }
 
+    /**
+     * Permet d'imprimer les commentaires d'un arbre.
+     * @param idArbre l'id de l'arbre
+     */
     public void accederCommentaireArbre(int idArbre)
     {
         boolean existe = false;
@@ -230,7 +225,6 @@ public class Municipalite {
             System.out.println("Cet arbre n'existe pas ou n'est pas remarquable\n");
         }
     }
-
 }
 
 

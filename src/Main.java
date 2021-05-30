@@ -171,6 +171,7 @@ public class Main {
                             " Suppression d'un donateur -> suppression\n" +
                             " Acceder à la messagerie -> messagerie\n" +
                             " Regarder compte rendu visite -> cr\n" +
+                            " Consulter rapport d'activité -> rapport\n" +
                             " Menu Principal -> menu");
 
                     String quoiA = entree.nextLine();
@@ -232,7 +233,11 @@ public class Main {
                         int id = Integer.parseInt(entree.nextLine());
                         paris.accederCommentaireArbre(id);
 
-                    }else if (quoiA.equals("menu")) {
+                    }else if (quoiA.equals("rapport")){
+                        System.out.println("Rapport d'activité\n");
+                        viveLesArbres.afficherRapport();
+                    }
+                    else if (quoiA.equals("menu")) {
                         menu = true;
                     }
                 }
