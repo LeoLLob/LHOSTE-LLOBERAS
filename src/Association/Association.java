@@ -146,21 +146,25 @@ public class Association
 
     /**
      * Permet de retirer un donateur de la liste des donateurs.
-     * @param donateur Le donateur à retirer
+     * @param nom Le donateur à retirer
      */
-    public void suppressionDonateur(Donateur donateur)
+    public void suppressionDonateur(String nom)
     {
-        for (Donateur dona:listeDonateurs)
+        boolean existe = false;
+        for (Donateur donateur:listeDonateurs)
         {
-            if (dona.getNom() == donateur.getNom())
+            if (donateur.getNom().equals(nom))
             {
-                System.out.println(dona.getNom() + " a été enlevé de la liste des donateurs");
-                dona.setEstInscrit(false);
-                listeDonateurs.remove(dona);
+                existe = true;
+                System.out.println(donateur.getNom() + " a été enlevé de la liste des donateurs");
+                donateur.setEstInscrit(false);
+                listeDonateurs.remove(donateur);
                 break;
             }
         }
-        System.out.println(donateur.getNom() + " n'a pas été trouvé dans la liste des donateurs");
+        if(!existe) {
+            System.out.println(nom + " n'a pas été trouvé dans la liste des donateurs");
+        }
     }
 
     /**
@@ -198,7 +202,7 @@ public class Association
     {
         solde = solde + MONTANTCOTISATION;
         recettes = recettes + MONTANTCOTISATION;
-        rapportActivite.append(membre.getNom() + "a payé sa cotisation\n");
+        rapportActivite.append(membre.getNom() + " a payé sa cotisation\n");
     }
 
     /**
@@ -261,7 +265,7 @@ public class Association
      */
     public void afficherNouveauxMessages()
     {
-        if(messagerie == null)
+        if(messagerie.isEmpty())
         {
             System.out.println("Aucun nouveau message n'a été reçu\n");
         }
@@ -293,59 +297,79 @@ public class Association
     {
         for (Membre membre:listeMembres)
         {
-            if(!membre.getAPaye())
+            if(!membre.getNom().equals("Personne ayant quitté l'association"))
             {
-                // Radiation des membres n'ayant pas payé leur cotisation
-                System.out.println(membre.getNom() + " n'a pas payé sa cotisation et ne fait donc plus" +
-                        " partie de l'association" + this.nom + "\n");
-                this.suppressionMembre(membre);
-            }
-
-            // Prise en compte des votes des membres
-            for (int voteMembre:membre.getListeVotes())
-            {
-                boolean estDejaNomine = false;
-                if (voteMembre != 0)
+                if(!membre.getAPaye())
                 {
-                    // Vérification dans la liste des votes déjà enregistrés
-                    for (Vote vote:listeVoix)
+                    // Radiation des membres n'ayant pas payé leur cotisation
+                    System.out.println(membre.getNom() + " n'a pas payé sa cotisation et ne fait donc plus" +
+                            " partie de l'association " + this.nom + "\n");
+                    this.suppressionMembre(membre);
+                }
+
+                // Prise en compte des votes des membres
+                for (int voteMembre:membre.getListeVotes())
+                {
+                    boolean estDejaNomine = false;
+                    if (voteMembre != 0)
                     {
-                        if (vote.id == voteMembre)
+                        // Vérification dans la liste des votes déjà enregistrés
+                        for (Vote vote:listeVoix)
                         {
-                            vote.voix++;
-                            estDejaNomine = true;
+                            if (vote.id == voteMembre)
+                            {
+                                vote.voix++;
+                                estDejaNomine = true;
+                            }
                         }
-                    }
-                    if (!estDejaNomine)
-                    {
-                        Vote newVote = new Vote(voteMembre);
-                        listeVoix.add(newVote);
+                        if (!estDejaNomine)
+                        {
+                            Vote newVote = new Vote(voteMembre);
+                            listeVoix.add(newVote);
+                        }
+                        voteMembre = 0;
                     }
                 }
+                // Reinitialisation du nombre des visites de chaque membre
+                membre.setNombreVisitesAnnuelle(0);
             }
-            // Reinitialisation du nombre des visites de chaque membre
-            membre.setNombreVisitesAnnuelle(0);
+
+
         }
 
         // Dépouillage
         for (Vote vote:listeVoix)
         {
             int i = 0;
-            while(recommandationsMembres.get(i).voix > vote.voix && i < 4)
+            if(!recommandationsMembres.isEmpty())
             {
-                i++;
-            }
-            if(i != 5)
-            {
-                for(int j = 4; j > i; j--)
+                for(int j = 0; j < recommandationsMembres.size(); j++)
                 {
-                    recommandationsMembres.set(j, recommandationsMembres.get(j -1));
+                    if (recommandationsMembres.get(j).voix < vote.voix)
+                    {
+                        i = j;
+                        break;
+                    }
                 }
-                recommandationsMembres.set(i, vote);
+                if(i != 5)
+                {
+                    for(int j = 4; j > i; j--)
+                    {
+                        recommandationsMembres.set(j, recommandationsMembres.get(j -1));
+                    }
+                    recommandationsMembres.set(i, vote);
+                }
             }
+            else
+            {
+                recommandationsMembres.add(vote);
+            }
+
         }
         // Envoi de la liste finale des votes
         envoiVotesFinaux(serviceEspacesVerts);
+        listeVoix = new ArrayList<>();
+        recommandationsMembres = new ArrayList<>();
 
         // Conclusion du rapport
         rapportActivite.append("Récapitulatif de fin d'année : \n" +
@@ -356,7 +380,7 @@ public class Association
         // Ecriture nouveau rapport pour l'année suivante
         rapportActivite = new StringBuilder("Synthèse de l'année précédente :\n" +
                 "Recettes : " + recettes + "€\n" + "Dépenses : " + depenses + "€\n" +
-                "Solde final : " + solde + "\n");
+                "Solde final : " + solde + "€\n");
 
         // Envoi des demandes de subventions aux donateurs
         envoiDemandesSubvention(30);
@@ -375,7 +399,6 @@ public class Association
         {
             serviceEspacesVerts.ajoutListeProchainsRemarquables(vote.id);
             System.out.println("L'arbre numéro " + vote.id + " a été nominé pour devenir arbre remarquable\n");
-            recommandationsMembres.remove(vote);
         }
     }
 

@@ -57,11 +57,11 @@ public class ServiceEspacesVerts {
     /**
      * Permet le traitement des arbres en attente de classification
      */
-    public void traitementNouveauxRemarquables()
+    public void traitementNouveauxRemarquables(Municipalite municipalite)
     {
         for (int id:listeProchainsRemarquables)
         {
-            notificationClassification(id);
+            municipalite.classification(this, id);
             listeProchainsRemarquables.remove(id);
         }
     }

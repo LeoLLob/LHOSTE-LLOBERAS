@@ -183,11 +183,12 @@ public class Membre
      */
     public void proposerVote(int vote, Municipalite ville)
     {
-        boolean estRemarquable = false;
+        boolean existe = false;
         for (Arbre arbre: ville.getListArbres())
         {
             if(vote == arbre.getId())
             {
+                existe = true;
                 if(arbre.getEstRemarquable())
                 {
                     System.out.println("L'arbre pour lequel vous votez est déjà remarquable");
@@ -205,7 +206,9 @@ public class Membre
                 }
             }
         }
-        System.out.println("L'arbre "+ vote + " n'existe pas");
+        if(!existe) {
+            System.out.println("L'arbre " + vote + " n'existe pas");
+        }
     }
 
 

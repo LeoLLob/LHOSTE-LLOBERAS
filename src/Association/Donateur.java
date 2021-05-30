@@ -64,15 +64,13 @@ public class Donateur
             if(rep.equals("oui"))
             {
                 effectuerDon(association, demande);
-                System.out.println("Vous avez payé " + demande + "€ à l'association " + association.getNom() + "\n");
-                demandesSubvention.remove(demande);
             }
             else if (rep.equals("non"))
             {
                 System.out.println("Vous avez refusé la demande de l'association " + association.getNom() + "\n");
-                demandesSubvention.remove(demande);
             }
         }
+        demandesSubvention = new ArrayList<>();
     }
 
 }
