@@ -13,7 +13,7 @@ public class Membre
     private String dateDeNaissance;
     private String adresse;
     private String dateDePremiereInscription;
-    private ArrayList<double> cotisation;
+    private ArrayList<Double> cotisation;
     private boolean aPaye;
     private int[] listeVotes;
     private Association association;
@@ -67,7 +67,7 @@ public class Membre
      * Permet de récupérer les cotisations effectuées par le membre.
      * @return Le tableau des cotisations du membre
      */
-    public ArrayList<double> getCotisation() {
+    public ArrayList<Double> getCotisation() {
         return cotisation;
     }
 

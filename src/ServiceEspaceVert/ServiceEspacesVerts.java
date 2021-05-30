@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ServiceEspacesVerts {
     private ArrayList<Association> listAssociations;
-    private ArrayList<int> listeProchainsRemarquables;
+    private ArrayList<Integer> listeProchainsRemarquables;
 
     /**
      * Permet de créer un service espaces verts.

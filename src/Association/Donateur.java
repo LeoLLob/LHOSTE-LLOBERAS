@@ -7,7 +7,7 @@ public class Donateur
 {
     private String nom;
     private boolean estInscrit;
-    public ArrayList<double> demandesSubvention;
+    public ArrayList<Double> demandesSubvention;
 
     /**
      * Permet de créer un donateur.
